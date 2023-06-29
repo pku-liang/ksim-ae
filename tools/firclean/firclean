@@ -1,0 +1,13 @@
+#!/bin/bash
+
+input=$1
+output=$2
+
+temp=$(mktemp)
+
+grep -v "FIRRTL version 1.1.0" $input > $temp
+
+JAVA_FLAGS="-Xmx4G"
+path=`dirname "$0"`
+java ${JAVA_FLAGS} -cp ${path}/firclean.jar Main $temp $output
+rm -rf $temp
