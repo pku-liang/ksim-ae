@@ -1,3 +1,3 @@
-EXTRA_DEPEND=$(shell which circt-verilator)
+EXTRA_DEPEND=$(shell which verilator) $(shell which firtool)
 
 include ../common.mk
