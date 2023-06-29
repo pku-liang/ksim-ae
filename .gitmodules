@@ -7,3 +7,6 @@
 [submodule "sims/repcut/kahypar"]
 	path = sims/repcut/kahypar
 	url = https://github.com/kahypar/kahypar.git
+[submodule "tools/firrtl/firrtl"]
+	path = tools/firrtl/firrtl
+	url = https://github.com/chipsalliance/firrtl.git
