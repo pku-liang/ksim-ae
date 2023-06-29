@@ -1,0 +1,1 @@
+export PATH=/home/keke/pro/ksim/install/bin:/home/keke/pro/ksim/ksim/build/bin:$PATH

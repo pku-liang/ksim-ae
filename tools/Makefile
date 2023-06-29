@@ -1,4 +1,4 @@
-TARGETS=timeit firclean
+TARGETS=timeit firclean firrtl
 
 setup: $(addprefix setup-,$(TARGETS))
 clean: $(addprefix clean-,$(TARGETS))

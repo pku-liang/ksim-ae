@@ -1,6 +1,8 @@
 
 build:
 	$(MAKE) -C runs build
+clean:
+	$(MAKE) -C runs clean
 
 setup: setup-sims setup-tools
 
