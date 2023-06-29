@@ -12,6 +12,6 @@ top=${top//.\//}
 top=${top%%.h}
 python3 $BASE_DIR/gen-tb.py $top > ${design}_tb.cpp
 
-g++ -O2 ${design}_tb.cpp -I$SIMS_DIR/include -o $design
+g++ -O2 ${design}_tb.cpp -I$TEST_ROOT/sims/include -o $design
 
 provide_exe_file $design $design
