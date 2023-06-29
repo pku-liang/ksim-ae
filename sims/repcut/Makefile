@@ -1,10 +1,11 @@
 INSTALL_DIR ?= ../bin
-.phony: setup clean
+.phony: setup clean clean-build
 
 setup: $(INSTALL_DIR)/repcut $(INSTALL_DIR)/KaHyPar
 
 prepare-kahypar: kahypar.patch
 	git submodule deinit -f kahypar; git submodule update --init kahypar
+	cd kahypar && git submodule update --init
 	cd kahypar && git apply ../kahypar.patch
 	touch $@
 prepare-repcut: repcut.patch
@@ -23,5 +24,8 @@ $(INSTALL_DIR)/KaHyPar: prepare-kahypar $(wildcard kahypar/kahypar/**/*)
 	$(MAKE) -C kahypar/build
 	cp kahypar/build/kahypar/application/KaHyPar $@
 
+clean-build:
+	git submodule deinit -f kahypar essent
+
 clean:
-	rm -rf $(INSTALL_DIR)/{repcut, repcut.jar, KaHyPar}
+	rm -rf $(INSTALL_DIR)/{repcut, repcut.jar, KaHyPar} prepare*

@@ -1,8 +1,6 @@
 INSTALL_DIR ?= ../bin
 TARGET = $(INSTALL_DIR)/essent
-.phony: setup clean
-
-.phony: setup clean
+.phony: setup clean clean-build
 
 setup: $(TARGET)
 
@@ -15,5 +13,8 @@ $(TARGET): prepare $(wildcard essent/src/**/*)
 	cd essent && sbt assembly
 	cp essent/utils/bin/* $(INSTALL_DIR)
 
+clean-build:
+	git submodule deinit -f essent
+
 clean:
-	rm -rf $(INSTALL_DIR)/{essent,essent.jar}
+	rm -rf $(INSTALL_DIR)/{essent,essent.jar} prepare*
