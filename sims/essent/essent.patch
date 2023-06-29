@@ -1,8 +1,50 @@
 diff --git a/src/main/scala/Compiler.scala b/src/main/scala/Compiler.scala
-index e1b3ee1..7a813de 100644
+index 9e6e60f..57215be 100644
 --- a/src/main/scala/Compiler.scala
 +++ b/src/main/scala/Compiler.scala
-@@ -315,7 +315,8 @@ class EssentCompiler(opt: OptFlags) {
+@@ -11,6 +11,7 @@ import firrtl.ir._
+ import firrtl.options.Dependency
+ import firrtl.stage.TransformManager.TransformDependency
+ import firrtl.stage.transforms
++import scala.collection.mutable
+ 
+ import logger._
+ 
+@@ -20,6 +21,7 @@ class EssentEmitter(initialOpt: OptFlags, w: Writer, circuit: Circuit) extends L
+   implicit val rn = new Renamer
+   val actTrac = new ActivityTracker(w, initialOpt)
+   val vcd = if (initialOpt.withVCD) Some(new Vcd(circuit,initialOpt,w,rn)) else None
++  private val usedNames = mutable.HashSet[String]()
+   // Declaring Modules
+   //----------------------------------------------------------------------------
+   def declareModule(m: Module, topName: String) {
+@@ -43,7 +45,9 @@ class EssentEmitter(initialOpt: OptFlags, w: Writer, circuit: Circuit) extends L
+     w.writeLines(0, s"typedef struct $modName {")
+     w.writeLines(1, registerDecs)
+     w.writeLines(1, memDecs)
+-    w.writeLines(1, m.ports flatMap emitPort(modName == topName))
++    val ports = m.ports flatMap emitPort(modName == topName)
++    ports foreach {x => usedNames.add(x.split(" ")(1).takeWhile(_ != ';'))}
++    w.writeLines(1, ports)
+     w.writeLines(1, moduleDecs)
+     w.writeLines(0, "")
+     w.writeLines(1, s"$modName() {")
+@@ -120,8 +124,12 @@ class EssentEmitter(initialOpt: OptFlags, w: Writer, circuit: Circuit) extends L
+                           opt: OptFlags) {
+     // predeclare part outputs
+     val outputPairs = condPartWorker.getPartOutputsToDeclare()
+-    val outputConsumers = condPartWorker.getPartInputMap()
+-    w.writeLines(1, outputPairs map {case (name, tpe) => s"${genCppType(tpe)} ${rn.emit(name)};"})
++    val outputConsumers = condPartWorker.getPartInputMap()    
++    w.writeLines(1, outputPairs collect {
++      case (name, tpe) if ! usedNames.contains(rn.emit(name)) =>
++        usedNames.add(rn.emit(name))
++        s"${genCppType(tpe)} ${rn.emit(name)};"
++    })
+     val extIOCacheDecs = condPartWorker.getExternalPartInputTypes(extIOtypes) map {
+       case (name, tpe) => s"${genCppType(tpe)} ${rn.emit(name + condPartWorker.cacheSuffix)};"
+     }
+@@ -317,7 +325,8 @@ class EssentCompiler(opt: OptFlags) {
        Dependency(essent.passes.FixMulResultWidth),
        Dependency(essent.passes.DistinctTypeInstNames),
        Dependency(essent.passes.RemoveAsAsyncReset),
@@ -12,48 +54,3 @@ index e1b3ee1..7a813de 100644
      )
  
    def compileAndEmit(circuit: Circuit) {
-diff --git a/src/main/scala/passes/ModuleToposort.scala b/src/main/scala/passes/ModuleToposort.scala
-new file mode 100644
-index 0000000..8a07228
---- /dev/null
-+++ b/src/main/scala/passes/ModuleToposort.scala
-@@ -0,0 +1,39 @@
-+package essent.passes
-+
-+import firrtl._
-+import firrtl.ir._
-+import firrtl.passes._
-+import scala.collection.mutable
-+
-+
-+object ModuleToposort extends Pass {
-+  def desc = "Reorder modules to all the module declared before instantiate"
-+
-+  override def prerequisites = Nil
-+  override def optionalPrerequisites = Nil
-+  override def invalidates(a: Transform) = false
-+
-+  def run(c: Circuit): Circuit = {
-+    val moduleMap = c.modules.map(_.name).zip(c.modules).toMap
-+    val mark = mutable.HashSet[String]()
-+    val buffer = mutable.ArrayBuffer[DefModule]()
-+    def onModule(m: DefModule): Unit = {
-+      def onStmt(s: Statement): Unit = {
-+        s match {
-+          case Block(stmts) => stmts foreach onStmt
-+          case DefInstance(info, name, module, tpe) =>
-+            if (!mark.contains(module)) {
-+              mark.add(module)
-+              onModule(moduleMap(module))
-+            }
-+          case o =>
-+        }
-+      }
-+      m foreachStmt onStmt
-+      buffer.append(m)
-+    }
-+    mark.add(c.main)
-+    onModule(moduleMap(c.main))
-+    c.copy(modules = buffer)
-+  }
-+}

@@ -1,8 +1,40 @@
 diff --git a/src/main/scala/Compiler.scala b/src/main/scala/Compiler.scala
-index 3c94a86..12f74fa 100644
+index 3c94a86..1ebc0fd 100644
 --- a/src/main/scala/Compiler.scala
 +++ b/src/main/scala/Compiler.scala
-@@ -1291,7 +1291,8 @@ class EssentCompiler(opt: OptFlags) {
+@@ -24,6 +24,7 @@ class EssentEmitter(initialOpt: OptFlags, writer: Writer) extends LazyLogging {
+   var sigNameToID = Map[String,Int]()
+ 
+   implicit val rn = new Renamer
++  private val usedNames = mutable.HashSet[String]()
+ 
+ 
+   // parallel function name
+@@ -242,7 +243,9 @@ class EssentEmitter(initialOpt: OptFlags, writer: Writer) extends LazyLogging {
+     writeLines(0, s"typedef struct $modName {")
+     writeLines(1, registerDecs)
+     writeLines(1, memDecs)
+-    writeLines(1, m.ports flatMap emitPort(modName == topName))
++    val ports = m.ports flatMap emitPort(modName == topName)
++    ports foreach {x => usedNames.add(x.split(" ")(1).takeWhile(_ != ';'))}
++    writeLines(1, ports)
+     writeLines(1, extModuleDecs)
+     writeLines(1, s"DesignData ${getGlobalDataName()};")
+     writeLines(0, "")
+@@ -627,7 +630,11 @@ class EssentEmitter(initialOpt: OptFlags, writer: Writer) extends LazyLogging {
+     // predeclare part outputs
+     val outputPairs = condPartWorker.getPartOutputsToDeclare()
+     val outputConsumers = condPartWorker.getPartInputMap()
+-    writeLines(1, outputPairs map {case (name, tpe) => s"${genCppType(tpe)} ${rn.emit(name)};"})
++    writeLines(1, outputPairs collect {
++      case (name, tpe) if ! usedNames.contains(rn.emit(name)) =>
++        usedNames.add(rn.emit(name))
++        s"${genCppType(tpe)} ${rn.emit(name)};"
++    })
+     val extIOCacheDecs = condPartWorker.getExternalPartInputTypes(extIOtypes) map {
+       case (name, tpe) => s"${genCppType(tpe)} ${rn.emit(name + condPartWorker.cacheSuffix)};"
+     }
+@@ -1291,7 +1298,8 @@ class EssentCompiler(opt: OptFlags) {
        Dependency(essent.passes.DistinctTypeInstNames),
        Dependency(essent.passes.RemoveAsAsyncReset),
        Dependency(essent.passes.ReplaceRsvdKeywords),
@@ -14,7 +46,7 @@ index 3c94a86..12f74fa 100644
    def compileAndEmit(circuit: Circuit) {
 diff --git a/src/main/scala/passes/ModuleToposort.scala b/src/main/scala/passes/ModuleToposort.scala
 new file mode 100644
-index 0000000..5c494a9
+index 0000000..6be5d81
 --- /dev/null
 +++ b/src/main/scala/passes/ModuleToposort.scala
 @@ -0,0 +1,39 @@
@@ -42,7 +74,7 @@ index 0000000..5c494a9
 +        s match {
 +          case Block(stmts) => stmts foreach onStmt
 +          case DefInstance(info, name, module, tpe) =>
-+            if (mark contains module) {
++            if (!mark.contains(module)) {
 +              mark.add(module)
 +              onModule(moduleMap(module))
 +            }
