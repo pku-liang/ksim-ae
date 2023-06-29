@@ -1,0 +1,6 @@
+[submodule "sims/essent/essent"]
+	path = sims/essent/essent
+	url = https://github.com/ucsc-vama/essent.git
+[submodule "sims/repcut/essent"]
+	path = sims/repcut/essent
+	url = https://github.com/ucsc-vama/essent.git
