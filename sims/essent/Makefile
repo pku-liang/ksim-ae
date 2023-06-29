@@ -6,7 +6,12 @@ TARGET = $(INSTALL_DIR)/essent
 
 setup: $(TARGET)
 
-$(TARGET): $(wildcard essent/src/**/*)
+prepare: essent.patch
+	git submodule deinit -f essent; git submodule update --init essent
+	cd essent && git apply ../essent.patch
+	touch prepare
+
+$(TARGET): prepare $(wildcard essent/src/**/*)
 	cd essent && sbt assembly
 	cp essent/utils/bin/* $(INSTALL_DIR)
 

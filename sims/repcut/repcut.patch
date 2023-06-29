@@ -1,0 +1,59 @@
+diff --git a/src/main/scala/Compiler.scala b/src/main/scala/Compiler.scala
+index 3c94a86..12f74fa 100644
+--- a/src/main/scala/Compiler.scala
++++ b/src/main/scala/Compiler.scala
+@@ -1291,7 +1291,8 @@ class EssentCompiler(opt: OptFlags) {
+       Dependency(essent.passes.DistinctTypeInstNames),
+       Dependency(essent.passes.RemoveAsAsyncReset),
+       Dependency(essent.passes.ReplaceRsvdKeywords),
+-      Dependency(essent.passes.CheckStatistics)
++      Dependency(essent.passes.CheckStatistics),
++      Dependency(essent.passes.ModuleToposort)
+     )
+ 
+   def compileAndEmit(circuit: Circuit) {
+diff --git a/src/main/scala/passes/ModuleToposort.scala b/src/main/scala/passes/ModuleToposort.scala
+new file mode 100644
+index 0000000..5c494a9
+--- /dev/null
++++ b/src/main/scala/passes/ModuleToposort.scala
+@@ -0,0 +1,38 @@
++package essent.passes
++
++import firrtl._
++import firrtl.ir._
++import firrtl.passes._
++import scala.collection.mutable
++
++
++object ModuleToposort extends Pass {
++  def desc = "Reorder modules to all the module declared before instantiate"
++
++  override def prerequisites = Nil
++  override def optionalPrerequisites = Nil
++  override def invalidates(a: Transform) = false
++
++  def run(c: Circuit): Circuit = {
++    val moduleMap = c.modules.map(_.name).zip(c.modules).toMap
++    val mark = mutable.HashSet[String]()
++    val buffer = mutable.ArrayBuffer[DefModule]()
++    def onModule(m: DefModule): Unit = {
++      def onStmt(s: Statement): Unit = {
++        s match {
++          case Block(stmts) => stmts foreach onStmt
++          case DefInstance(info, name, module, tpe) =>
++            if (mark contains module) {
++              mark.add(module)
++              onModule(moduleMap(module))
++            }
++          case o =>
++        }
++      }
++      m foreachStmt onStmt
++      buffer.append(m)
++    }
++    mark.add(c.main)
++    onModule(moduleMap(c.main))
++    c.copy(modules = buffer)
++  }
++}
