@@ -1,4 +1,4 @@
-export INSTALL_DIR ?= ../bin
+INSTALL_DIR ?= ../bin
 .phony: setup clean
 
 setup: $(INSTALL_DIR)/timeit
