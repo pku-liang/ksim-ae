@@ -1,0 +1,12 @@
+diff --git a/kahypar/datastructure/fast_reset_flag_array.h b/kahypar/datastructure/fast_reset_flag_array.h
+index eda1dd12..0c20d1d3 100644
+--- a/kahypar/datastructure/fast_reset_flag_array.h
++++ b/kahypar/datastructure/fast_reset_flag_array.h
+@@ -32,6 +32,7 @@
+ #include <cstring>
+ #include <limits>
+ #include <vector>
++#include <memory>
+ 
+ #include "kahypar/macros.h"
+ 

@@ -4,3 +4,6 @@
 [submodule "sims/repcut/essent"]
 	path = sims/repcut/essent
 	url = https://github.com/ucsc-vama/essent.git
+[submodule "sims/repcut/kahypar"]
+	path = sims/repcut/kahypar
+	url = https://github.com/kahypar/kahypar.git
