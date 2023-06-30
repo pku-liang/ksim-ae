@@ -10,3 +10,6 @@
 [submodule "tools/firrtl/firrtl"]
 	path = tools/firrtl/firrtl
 	url = https://github.com/chipsalliance/firrtl.git
+[submodule "sims/verilator/verilator"]
+	path = sims/verilator/verilator
+	url = https://github.com/verilator/verilator.git
