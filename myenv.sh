@@ -1,1 +1,0 @@
-export PATH=/home/keke/pro/ksim/ksim-artifact/ksim/install/bin:$PATH
