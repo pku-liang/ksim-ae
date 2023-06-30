@@ -1,8 +1,11 @@
+.phony: build-cases clean-cases
 
-build:
+build-cases:
 	$(MAKE) -C runs build
-clean:
+clean-cases:
 	$(MAKE) -C runs clean
+
+.phony: setup setup-sims setup-tools clean-setup-build
 
 setup: setup-sims setup-tools
 
@@ -11,3 +14,6 @@ setup-sims:
 
 setup-tools:
 	$(MAKE) -C tools setup
+
+clean-setup-build:
+	$(MAKE) -C sims cleanbuild
