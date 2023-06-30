@@ -7,6 +7,8 @@ clean-cases:
 
 run-all:
 	python benchmark.py
+clean-run:
+	rm -rf results
 
 .phony: setup setup-sims setup-tools clean-setup-build
 

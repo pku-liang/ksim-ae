@@ -10,7 +10,7 @@ runs_dir = root.joinpath('runs')
 results_dir = root.joinpath('results/runs')
 
 num_runs = 10
-run_cycle = 100000
+run_cycle = 10000
 
 tasksets = {
   'verilator': 'taskset -c 4',
@@ -40,7 +40,7 @@ perf_events = [
 	# "l2_cache_misses_from_ic_miss",
 	# "sse_avx_stalls",
 	# "task-clock",
-  # "cache-misses",
+  "cache-misses",
 	"cycles",
 	"instructions",
 	# "branches",

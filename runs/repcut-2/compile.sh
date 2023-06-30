@@ -5,7 +5,7 @@ design=$1
 prepare_target_dir $design
 
 firclean $design.fir $design.cleaned.fir
-timeit repcut ./$design.cleaned.fir -O0 --parallel 2 2>&1 | tee compile.sh
+timeit repcut ./$design.cleaned.fir -O0 --parallel 2 2>&1 | tee compile.log
 
 top=$(find . -name "*.h")
 top=${top//.\//}
