@@ -5,6 +5,9 @@ build-cases:
 clean-cases:
 	$(MAKE) -C runs clean
 
+run-all:
+	python benchmark.py
+
 .phony: setup setup-sims setup-tools clean-setup-build
 
 setup: setup-sims setup-tools
