@@ -14,6 +14,14 @@ prepare_target_dir() {
   pushd $target_dir
 }
 
+enter_target_dir() {
+  design=$1
+  target_dir=obj/$design
+  export BASE_DIR=$PWD
+  set -e
+  pushd $target_dir
+}
+
 provide_exe_file() {
   design=$1
   file=$2

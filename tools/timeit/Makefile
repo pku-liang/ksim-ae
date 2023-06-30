@@ -3,7 +3,7 @@ INSTALL_DIR ?= ../bin
 
 setup: $(INSTALL_DIR)/timeit
 $(INSTALL_DIR)/timeit: timeit.cpp
-	g++ -O2 $< -o $@
+	g++ -std=c++11 -O2 $< -o $@
 
 clean:
 	rm -rf $(INSTALL_DIR)/timeit
