@@ -12,6 +12,7 @@ int main(int argc, char ** argv) {{
   auto dut = new V{dut};
   auto cnt = atoi(argv[1]);
   dut->reset = 0;
+  auto start = std::chrono::system_clock::now();
 ''')
 
 with open(f'obj_dir/V{dut}.h') as f:
@@ -28,15 +29,6 @@ with open(f'obj_dir/V{dut}.h') as f:
         print(f"  dut->{name} = {value};")
 
 print(f'''
-  for(int i = 0; i < cnt; i++) {{
-    dut->clock = 0;
-    dut->eval();
-    dut->clock = 1;
-    dut->eval();
-  }}
-''')
-print(f'''
-  auto start = std::chrono::system_clock::now();
   for(int i = 0; i < cnt; i++) {{
     dut->clock = 0;
     dut->eval();
