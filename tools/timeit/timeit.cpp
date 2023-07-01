@@ -21,7 +21,7 @@ int main(int argc, char ** argv) {
     waitpid(pid, &status, 0);
     auto stop = chrono::system_clock::now();
     if(is_microseconds) {
-      std::cerr << "Wall Time: " << chrono::duration_cast<chrono::microseconds>(stop - start).count() << "\n";
+      std::cout << chrono::duration_cast<chrono::microseconds>(stop - start).count() << "\n";
     }
     else {
       std::cerr << "Wall Time: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << "\n";
