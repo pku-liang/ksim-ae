@@ -1,4 +1,4 @@
-EXTRA_DEPEND = $(shell which essent) compile.sh gentb.py
+EXTRA_DEPEND = $(shell which essent)
 FILTER_OUT_CASE = StreamComp
 
 include ../common.mk

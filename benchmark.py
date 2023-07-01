@@ -17,7 +17,10 @@ tasksets = {
   'circt-verilator': 'taskset -c 4',
   'ksim': 'taskset -c 4',
   'essent': 'taskset -c 4',
+  'repcut-1': 'taskset -c 4',
   'repcut-2': 'taskset -c 4,5',
+  'repcut-4': 'taskset -c 2,3,4,5',
+  'repcut-6': 'taskset -c 0,1,2,3,4,5',
   'vcs': 'taskset -c 4'
 }
 
