@@ -10,7 +10,7 @@ runs_dir = root.joinpath('runs')
 results_dir = root.joinpath('results/runs')
 
 num_runs = 10
-run_cycle = 100000
+run_cycle = 10000
 
 tasksets = {
   'verilator': 'taskset -c 4',
