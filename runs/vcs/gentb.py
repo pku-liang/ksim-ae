@@ -1,5 +1,6 @@
 import sys
 import re
+import random
 
 file = sys.argv[1]
 top = sys.argv[2]
@@ -71,7 +72,8 @@ print('''\
 
 for d, hb, lb, name in ports:
   if d == 'input':
-    print(f'      {name} <= $random();')
+    if random.randint(0, 8) == 0:
+      print(f'      {name} <= $random();')
 
 print('    end')
 
