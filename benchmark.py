@@ -14,9 +14,9 @@ run_cycle = 10000
 
 tasksets = {
   'circt-verilator': 'taskset -c 4',
-  'circt-verilator-2': 'taskset -c 4,5',
-  'circt-verilator-4': 'taskset -c 4,5,6,7',
-  'verilator': 'taskset -c 4',
+  'verilator-1': 'taskset -c 4',
+  'verilator-2': 'taskset -c 4,5',
+  'verilator-4': 'taskset -c 4,5,6,7',
   'ksim': 'taskset -c 4',
   'essent': 'taskset -c 4',
   'repcut-1': 'taskset -c 4',

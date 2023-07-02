@@ -1,5 +1,6 @@
 import sys
 import re
+import random
 
 name = sys.argv[1]
 
@@ -38,7 +39,7 @@ with open(name + '.h') as f:
         width, var = mat.groups()
         if 'valid' in var.lower():
           print(f'    dut->{var} = UInt<{width}>(1);')
-        else:
+        elif random.randint(0, 16) == 0:
           print(f'    dut->{var} = rand() & ((1ll<<{width}) - 1);')
 
 print('''
