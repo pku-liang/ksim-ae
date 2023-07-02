@@ -42,9 +42,11 @@ with open(name + '.h') as f:
           print(f'    dut->{var} = UInt<{width}>(1);')
         else:
           if 'Core' in name:
+            # cores is not as active as accelerators
             if random.randint(0, 8) == 0:
-              print(f'    dut->{var} = dut->{var} ^ UInt<{width}>(1);')
+              print(f'    dut->{var} = rand() & ((1ll << {width}) - 1);')
           else:
+            # accelerators are always streaming, with high activity
             print(f'    dut->{var} = dut->{var} ^ UInt<{width}>(1);')
 
 

@@ -26,6 +26,7 @@ $(INSTALL_DIR)/KaHyPar: prepare-kahypar $(wildcard kahypar/kahypar/**/*)
 
 clean-build:
 	git submodule deinit -f kahypar essent
+	rm -rf prepare*
 
 clean:
-	rm -rf $(INSTALL_DIR)/{repcut, repcut.jar, KaHyPar} prepare*
+	rm -rf $(INSTALL_DIR)/{repcut, repcut.jar, KaHyPar}

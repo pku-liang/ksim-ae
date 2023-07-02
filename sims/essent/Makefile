@@ -15,6 +15,7 @@ $(TARGET): prepare $(wildcard essent/src/**/*)
 
 clean-build:
 	git submodule deinit -f essent
+	rm -rf prepare*
 
 clean:
-	rm -rf $(INSTALL_DIR)/{essent,essent.jar} prepare*
+	rm -rf $(INSTALL_DIR)/{essent,essent.jar}
