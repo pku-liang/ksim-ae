@@ -1,6 +1,7 @@
 import sys
 import re
 import random
+random.seed(0)
 
 name = sys.argv[1]
 
@@ -39,8 +40,13 @@ with open(name + '.h') as f:
         width, var = mat.groups()
         if 'valid' in var.lower():
           print(f'    dut->{var} = UInt<{width}>(1);')
-        elif random.randint(0, 16) == 0:
-          print(f'    dut->{var} = rand() & ((1ll<<{width}) - 1);')
+        else:
+          if 'Core' in name:
+            if random.randint(0, 8) == 0:
+              print(f'    dut->{var} = dut->{var} ^ UInt<{width}>(1);')
+          else:
+            print(f'    dut->{var} = dut->{var} ^ UInt<{width}>(1);')
+
 
 print('''
     dut->eval(true, false, true);
