@@ -74,7 +74,11 @@ print('    repeat(stop_clk) @(posedge clock) begin')
 
 for d, hb, lb, name in ports:
   if d == 'input':
-    print(f'      {name} <= $random();')
+    if 'RocketChip' in file:
+      # DTM should be streaming
+      print(f'      {name} <= $random();')
+    elif 'valid' in name.lower() or random.randint(0, 4) == 0:
+      print(f'      {name} <= $random();')
 
 print('    end')
 
