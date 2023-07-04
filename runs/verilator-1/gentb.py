@@ -27,6 +27,8 @@ with open(f'obj_dir/V{dut}.h') as f:
       elif "valid" in name or "vld" in name:
         value = 1
         print(f"  dut->{name} = {value};")
+      else:
+        print(f"  dut->{name} = 0;")
 
 print(f'''
   for(int i = 0; i < cnt; i++) {{

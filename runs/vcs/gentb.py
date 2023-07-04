@@ -67,12 +67,15 @@ print('''\
     repeat(2) @(posedge clock);
     reset = 0;
     $value$plusargs("run=%d", stop_clk);
-    repeat(stop_clk) @(posedge clock) begin\
 ''')
+print('    repeat(stop_clk) @(posedge clock) begin')
 
 for d, hb, lb, name in ports:
   if d == 'input':
-    if random.randint(0, 8) == 0:
+    if name in ['Rocket', 'Core']:
+      if random.randint(0, 8) == 0:
+        print(f'      {name} <= $random();')
+    else:
       print(f'      {name} <= $random();')
 
 print('    end')

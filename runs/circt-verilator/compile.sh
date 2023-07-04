@@ -4,7 +4,7 @@ design=$1
 . ../common.sh
 prepare_target_dir $design
 
-firtool $design.fir -o $design.v
+firtool --lowering-options="disallowPackedArrays" $design.fir -o $design.v
 timeit verilator --cc --Wno-fatal -DSYNTHESIS -CFLAGS "-O2" --threads 1 $design.v 2>&1 | tee compile.log
 python3 $BASE_DIR/gentb.py $design > ${design}_tb.cpp
 verilator --cc --Wno-fatal -DSYNTHESIS -CFLAGS "-O2" --threads 1 --exe $design.v ${design}_tb.cpp

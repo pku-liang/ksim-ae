@@ -3,6 +3,7 @@ from perflib import run_task
 import json
 import os
 import re
+from tqdm import tqdm
 
 root = Path('.')
 sims = re.split(r'\s+', os.environ['SIMS'].strip())
@@ -33,7 +34,7 @@ for s in sims:
 
 results_dir.mkdir(exist_ok=True, parents=True)
 runs = [(bench, sim) for bench in benchmarks for sim in sims]
-for bench, sim in runs:
+for bench, sim in tqdm(runs):
   run_task(
     bench, sim, 
     exe=runs_dir.joinpath(sim, 'bin', bench + '.out'),
