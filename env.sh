@@ -1,7 +1,7 @@
 export TEST_ROOT=$PWD
 export PATH=$(realpath ../ksim-artifact/ksim/install/bin):$PATH
 export PATH=$TEST_ROOT/sims/bin:$TEST_ROOT/sims/install/bin:$TEST_ROOT/tools/bin:$PATH
-export SIMS="circt-verilator verilator-1 verilator-2 verilator-4 ksim essent repcut-1 repcut-2 repcut-4 vcs"
+export SIMS="circt-verilator verilator-1 verilator-2 verilator-4 ksim essent repcut-1 repcut-2 repcut-4 repcut-6 repcut-8 vcs"
 
 _show_status() {
   if ! which $1 > /dev/null; then

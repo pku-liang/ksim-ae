@@ -10,7 +10,7 @@ runs_dir = root.joinpath('runs')
 results_dir = root.joinpath('results/runs')
 
 num_runs = 10
-run_cycle = 10000
+run_cycle = 100000
 
 tasksets = {
   'circt-verilator': 'taskset -c 4',
@@ -23,7 +23,8 @@ tasksets = {
   'repcut-2': 'taskset -c 4,5',
   'repcut-4': 'taskset -c 2,3,4,5',
   'repcut-6': 'taskset -c 0,1,2,3,4,5',
-  'vcs': 'taskset -c 4'
+  'repcut-8': 'taskset -c 0,1,2,3,4,5,6,7',
+  'vcs': 'taskset -c 4',
 }
 
 benchmarks = [f.stem for f in root.joinpath('cases').glob('*.fir')]

@@ -10,7 +10,7 @@ echo top module is $top
 firtool $design.fir -o $design.sv
 python3 $BASE_DIR/gentb.py $design.sv $top > harness.sv
 
-timeit vcs -sverilog +v2k +rad -q -timescale=1ns/1ns -l compile.log $design.sv harness.sv -o simv 2>&1 | tee compile.log
+timeit vcs -sverilog +v2k -q -timescale=1ns/1ns -l compile.log $design.sv harness.sv -o simv 2>&1 | tee compile.log
 
 cat >run.sh <<EOF
 #!/bin/bash
