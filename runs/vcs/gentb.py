@@ -2,6 +2,8 @@ import sys
 import re
 import random
 
+random.seed(0)
+
 file = sys.argv[1]
 top = sys.argv[2]
 
@@ -72,11 +74,7 @@ print('    repeat(stop_clk) @(posedge clock) begin')
 
 for d, hb, lb, name in ports:
   if d == 'input':
-    if name in ['Rocket', 'Core']:
-      if random.randint(0, 8) == 0:
-        print(f'      {name} <= $random();')
-    else:
-      print(f'      {name} <= $random();')
+    print(f'      {name} <= $random();')
 
 print('    end')
 
