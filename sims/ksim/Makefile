@@ -1,4 +1,4 @@
-export INSTALL_PREFIX ?= ../install
+export INSTALL_PREFIX ?= $(shell realpath ../install)
 
 setup: $(INSTALL_PREFIX)/bin/firtool $(INSTALL_PREFIX)/bin/ksim
 
