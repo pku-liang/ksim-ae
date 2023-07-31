@@ -12,13 +12,13 @@ clean-run:
 
 .phony: setup setup-sims setup-tools clean-setup-build
 
+prepare-setup:
 setup: setup-sims setup-tools
 
-setup-sims:
-	$(MAKE) -C sims setup
-
-setup-tools:
-	$(MAKE) -C tools setup
+prepare-setup-%:
+	$(MAKE) -C $* prepare
+setup-%:
+	$(MAKE) -C $* setup
 
 clean-tool-build:
 	$(MAKE) -C sims cleanbuild

@@ -3,6 +3,8 @@ INSTALL_DIR ?= ../bin
 
 setup: $(INSTALL_DIR)/repcut $(INSTALL_DIR)/KaHyPar
 
+prepare: prepare-kahypar prepare-repcut
+
 prepare-kahypar: kahypar.patch
 	git submodule deinit -f kahypar; git submodule update --init kahypar
 	cd kahypar && git submodule update --init

@@ -1,6 +1,8 @@
 INSTALL_DIR ?= ../bin
 .phony: setup clean
 
+prepare:
+
 setup: $(INSTALL_DIR)/firclean
 $(INSTALL_DIR)/firclean: firclean.jar firclean
 	cp $^ $(INSTALL_DIR)
