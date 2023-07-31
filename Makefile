@@ -12,7 +12,7 @@ clean-run:
 
 .phony: setup setup-sims setup-tools clean-setup-build
 
-prepare-setup:
+prepare-setup: prepare-setup-sims prepare-setup-tools
 setup: setup-sims setup-tools
 
 prepare-setup-%:
