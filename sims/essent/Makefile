@@ -17,5 +17,5 @@ clean-build:
 	git submodule deinit -f essent
 	rm -rf prepare*
 
-clean:
+clean: clean-build
 	rm -rf $(INSTALL_DIR)/{essent,essent.jar}

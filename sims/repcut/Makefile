@@ -28,5 +28,5 @@ clean-build:
 	git submodule deinit -f kahypar essent
 	rm -rf prepare*
 
-clean:
+clean: clean-build
 	rm -rf $(INSTALL_DIR)/{repcut, repcut.jar, KaHyPar}
