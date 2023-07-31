@@ -10,7 +10,8 @@ prepare:
 	touch $@
 
 $(INSTALL_PREFIX)/bin/ksim: prepare $(INSTALL_PREFIX)/bin/firtool
-	cd ksim && mkdir build && cd build && cmake .. -DCMAKE_INSTALL_PREFIX=$(INSTALL_PREFIX) && make
+	cd ksim && ([ -d build ] || mkdir build)
+	cd ksim/build && cmake .. -DCMAKE_INSTALL_PREFIX=$(INSTALL_PREFIX) && make
 
 $(INSTALL_PREFIX)/bin/firtool: prepare
 	cd ksim/third_party && ./setup-circt.sh
