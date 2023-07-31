@@ -1,3 +1,4 @@
+$(shell [ -d bin ] || mkdir bin)
 TARGETS=timeit firclean firrtl
 
 setup: $(addprefix setup-,$(TARGETS))
