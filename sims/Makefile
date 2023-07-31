@@ -1,7 +1,7 @@
+$(shell [ -d bin ] || mkdir bin)
+
 TARGETS=essent repcut verilator ksim
 .phony: setup clean
-
-$(shell [ -d bin ] || mkdir bin)
 
 setup: $(addprefix setup-,$(TARGETS))
 cleanbuild: $(addprefix cleanbuild-,$(TARGETS))
