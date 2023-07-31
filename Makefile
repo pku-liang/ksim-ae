@@ -22,7 +22,7 @@ setup-%:
 
 clean-tool-build:
 	$(MAKE) -C sims cleanbuild
-clean:
+distclean:
 	$(MAKE) -C sims clean
 	$(MAKE) -C tools clean
 	$(MAKE) -C runs clean
