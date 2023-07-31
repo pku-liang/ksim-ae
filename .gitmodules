@@ -13,3 +13,6 @@
 [submodule "sims/verilator/verilator"]
 	path = sims/verilator/verilator
 	url = https://github.com/verilator/verilator.git
+[submodule "sims/ksim/ksim"]
+	path = sims/ksim/ksim
+	url = https://github.com/KEKE046/ksim.git
