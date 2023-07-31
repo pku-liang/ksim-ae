@@ -1,4 +1,4 @@
-TARGETS=essent repcut verilator
+TARGETS=essent repcut verilator ksim
 .phony: setup clean
 
 setup: $(addprefix setup-,$(TARGETS))
