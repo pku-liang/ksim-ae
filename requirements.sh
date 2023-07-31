@@ -1,5 +1,6 @@
 #!/bin/bash
 pacman -S \
+  wget \
   jre11-openjdk-headless sbt \
   base-devel clang llvm \
   python3 python-pip python-numpy python-pandas python-matplotlib python-seaborn python-pathlib python-tqdm \
