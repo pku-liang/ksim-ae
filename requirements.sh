@@ -4,4 +4,5 @@ pacman -S \
   jre11-openjdk-headless sbt \
   base-devel clang llvm \
   python3 python-pip python-numpy python-pandas python-matplotlib python-seaborn python-pathlib python-tqdm \
-  cmake ninja boost
+  cmake ninja boost ccache \
+  flex bison
