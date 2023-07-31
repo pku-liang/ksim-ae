@@ -14,3 +14,5 @@ $(INSTALL_PREFIX)/bin/verilator: prepare $(wildcard verilator/src/**/*)
 clean-build:
 	git submodule deinit -f verilator
 	rm -rf prepare
+
+clean: clean-build

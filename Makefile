@@ -20,5 +20,9 @@ setup-sims:
 setup-tools:
 	$(MAKE) -C tools setup
 
-clean-setup-build:
+clean-tool-build:
 	$(MAKE) -C sims cleanbuild
+clean:
+	$(MAKE) -C sims clean
+	$(MAKE) -C tools clean
+	$(MAKE) -C runs clean
