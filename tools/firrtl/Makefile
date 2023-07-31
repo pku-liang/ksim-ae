@@ -11,5 +11,9 @@ $(INSTALL_DIR)/firrtl: prepare $(wildcard src/**/*)
 	cd firrtl && sbt assembly
 	cp firrtl/utils/bin/{firrtl,firrtl.jar} $(INSTALL_DIR)
 
-clean:
+clean-build:
+	git submodule deinit -f firrtl
+	rm -rf prepare
+
+clean: clean-build
 	rm -rf $(INSTALL_DIR)/{firrtl, firrtl.jar}
