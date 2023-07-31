@@ -1,9 +1,13 @@
 CASE_ROOT = $(TEST_ROOT)/cases
 CASES = $(wildcard $(CASE_ROOT)/*.fir)
 TARGETS = $(patsubst $(CASE_ROOT)/%.fir,obj/%.txt,$(CASES))
+EXTRA_DEP = $(shell which ksim)
 $(shell [ -d obj ] || mkdir obj)
 
-all: $(TARGETS)
+all: $(TARGETS) $(CASE_ROOT)/results/size.csv
 
-obj/%.txt: $(wildcard $(CASE_ROOT)/*.fir)
-	./count-size.sh $^ $@
+$(CASE_ROOT)/results/size.csv: collect.py $(TARGETS)
+	python collect.py
+
+obj/%.txt: $(CASE_ROOT)/%.fir $(EXTRA_DEP)
+	./count-size.sh $< $@

@@ -41,7 +41,7 @@ with open(name + '.h') as f:
         if 'valid' in var.lower():
           print(f'    dut->{var} = UInt<{width}>(1);')
         else:
-          if name in ['Rocket', 'Core']:
+          if name in ['Rocket', 'Core', 'TestHarness']:
             if random.randint(0, 8) == 0:
               print(f'    dut->{var} = dut->{var} ^ UInt<{width}>(1);')
           else:
