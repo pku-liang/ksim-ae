@@ -12,7 +12,7 @@ prepare:
 $(INSTALL_PREFIX)/bin/ksim: prepare $(INSTALL_PREFIX)/bin/firtool
 	cd ksim && ([ -d build ] || mkdir build)
 	cd ksim/build && cmake .. -DCMAKE_INSTALL_PREFIX=$(INSTALL_PREFIX)
-	$(MAKE) -C ksim/build
+	$(MAKE) -C ksim/build install
 
 $(INSTALL_PREFIX)/bin/firtool: prepare
 	cd ksim/third_party && ./setup-circt.sh
