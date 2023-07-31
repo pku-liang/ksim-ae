@@ -1,9 +1,12 @@
 export TEST_ROOT=$PWD
+export SIMS="circt-verilator verilator-1 verilator-2 verilator-4 ksim essent repcut-1 repcut-2 repcut-4 repcut-6 repcut-8"
 if [[ "$_KSIM_ARTIFACT_ENV" != "1" ]]; then
   export PATH=$TEST_ROOT/sims/bin:$TEST_ROOT/sims/install/bin:$TEST_ROOT/tools/bin:$PATH
+  if which vcs >/dev/null 2>/dev/null; then
+    export SIMS="$SIMS vcs"
+  fi
 fi
 export _KSIM_ARTIFACT_ENV=1
-export SIMS="circt-verilator verilator-1 verilator-2 verilator-4 ksim essent repcut-1 repcut-2 repcut-4 repcut-6 repcut-8 vcs"
 
 _show_status() {
   if ! which $1 2>/dev/null > /dev/null; then
@@ -37,6 +40,7 @@ show-status() {
   _show_status firclean
   _show_status timeit
   _show_status vcs
+  echo "available runs: $SIMS"
 }
 
 show-status
