@@ -1,5 +1,5 @@
 export TEST_ROOT=$PWD
-export HOSTS="plat-2 plat-3"
+export HOSTS="plat-1 plat-2"
 export SIMS="circt-verilator verilator-1 verilator-2 verilator-4 ksim essent repcut-1 repcut-2 repcut-4 repcut-6 repcut-8"
 if [[ "$_KSIM_AE_PATH_UPDATED" != "1" ]]; then
   export PATH=$TEST_ROOT/sims/bin:$TEST_ROOT/sims/install/bin:$TEST_ROOT/tools/bin:$PATH
