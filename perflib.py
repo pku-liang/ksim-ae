@@ -30,7 +30,7 @@ perf_events = [
 def check_events():
   result = subprocess.run(["perf", "list"], capture_output=True, shell=True)
   for event in list(perf_events):
-    if event not in result:
+    if event not in result.stdout:
       print(f'remove unsupported perf event: {event}')
       perf_events.remove(event)
   print('perf event: ', ' '.join(perf_events))
