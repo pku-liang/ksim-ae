@@ -17,7 +17,9 @@ for plat in plats:
 
 df = pd.DataFrame(speedups, index=plats).T
 df.index.name = None
-df.style.format('{:.2f}', na_rep='-').to_latex(
+s = df.style
+s.set_table_styles([{'selector': '', 'props': ':small'}])
+s.format('{:.2f}', na_rep='-').to_latex(
   'out/tab_ex1.tex',
   caption='Average Speedup',
   hrules=True,

@@ -26,7 +26,9 @@ for plat in plats:
   ser = ser.apply(clean_value)
   cpuinfo.append(ser)
 
-pd.DataFrame(cpuinfo, index=plats).T.style.hide(axis='index').to_latex(
+s = pd.DataFrame(cpuinfo, index=plats).T.style
+s.set_table_styles([{'selector': '', 'props': ':small'}])
+s.to_latex(
   'out/tab_07_1.tex',
   caption='Evaluation Settings 1',
   label='tab:setup-1',
