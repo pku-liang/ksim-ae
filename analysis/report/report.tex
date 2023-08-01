@@ -10,6 +10,7 @@
 \maketitle
 
 \begin{itemize}[noitemsep,topsep=0pt]
+  \item {\bf Memory access instructions in Figure 2} is shown in \autoref{fig:memratio}.
   \item {\bf Benchmark size in Table 5} is shown in \autoref{tab:bench-size}.
   \item {\bf Environment setup in Table 7} is shown in \autoref{tab:setup-1} and \autoref{tab:setup-2}.
   \item {\bf Average speedups in Section 7.3 and 7.5} are shown in \autoref{tab:avg-speedup}.
@@ -19,6 +20,15 @@
   \item {\bf Multi thread performance in Figure 12} is shown in \autoref{fig:multi}.
   \item {\bf Performance on platforms in Figure 13} is shown in \autoref{fig:plat}
 \end{itemize}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.95\linewidth]{../out/fig_02}
+  \vspace*{-4mm}
+  \caption{The proportion of data memory access instructions to the total dynamic instructions of Verilator for different benchmarks.}
+  \label{fig:memratio}
+\end{figure}
+
 
 \input{../out/tab_05.tex}
 \input{../out/tab_07_1.tex}
