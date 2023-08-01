@@ -9,5 +9,7 @@ df.columns = name
 
 df.set_index('Benchmark').loc[bench_order].reset_index().style.hide(axis='index').to_latex(
   'out/tab_05.tex',
-  caption='Benchmark used in Khronos'
+  caption='Benchmark used in Khronos',
+  position_float="centering",
+  hrules=True
 )

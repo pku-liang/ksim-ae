@@ -5,8 +5,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib import ticker
 
-df = load_perf()
-
 def plot(df: pd.DataFrame, set_ours=True):
   df = df.set_index('benchmark').loc[bench_order].reset_index()
   if set_ours:
@@ -41,4 +39,5 @@ def plot(df: pd.DataFrame, set_ours=True):
   plt.subplots_adjust(left=0.05, right=0.97, bottom=0.13, top=0.95)
 
 if __name__ == '__main__':
+  plot(load_perf())
   plt.savefig('out/fig_10_2.pdf')

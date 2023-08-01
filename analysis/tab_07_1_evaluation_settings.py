@@ -27,5 +27,7 @@ for plat in plats:
 
 pd.DataFrame(cpuinfo, index=plats).T.style.hide(axis='index').to_latex(
   'out/tab_07_1.tex',
-  caption='Evaluation Settings 1'
+  caption='Evaluation Settings 1',
+  position_float="centering",
+  hrules=True
 )

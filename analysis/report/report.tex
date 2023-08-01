@@ -1,0 +1,54 @@
+\documentclass{sig-alternate}
+\usepackage{subcaption}
+\usepackage{booktabs}
+
+\title{Artifact Report}
+
+\begin{document}
+\maketitle
+
+\pagestyle{plain}
+
+\begin{figure*}[t]
+  \centering
+  \begin{subfigure}{\linewidth}
+    \centering
+    \caption{Memory access comparison}
+    \includegraphics[width=\linewidth]{../out/fig_10_1}
+  \end{subfigure}
+  \begin{subfigure}{\linewidth}
+    \centering
+    \caption{Simulation speedup comparison}
+    \includegraphics[width=\linewidth]{../out/fig_10_2}
+  \end{subfigure}
+  \vspace*{-5mm}
+  \caption{Single Thread Performance Comparison}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=\linewidth]{../out/fig_12}
+  \vspace*{-5mm}
+  \caption{Multi-thread Performance Comparison}
+\end{figure*}
+
+\begin{figure*}[t]
+  \begin{subfigure}{\linewidth}
+    \caption{Simulation Speedup on \texttt{plat-1}}
+    \includegraphics[width=\linewidth]{../out/fig_13_1}
+  \end{subfigure}
+  \begin{subfigure}{\linewidth}
+    \caption{Simulation Speedup on \texttt{plat-2}}
+    \includegraphics[width=\linewidth]{../out/fig_13_2}
+  \end{subfigure}
+  \vspace*{-4mm}
+  \caption{Performance on different platforms. }
+\end{figure*}
+
+\input{../out/tab_05.tex}
+\input{../out/tab_07_1.tex}
+\input{../out/tab_07_2.tex}
+\input{../out/tab_09.tex}
+\input{../out/tab_10.tex}
+
+\end{document}
