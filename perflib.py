@@ -28,7 +28,7 @@ perf_events = [
 ]
 
 def check_events():
-  result = subprocess.run(["perf", "list"], capture_output=True, shell=True)
+  result = subprocess.run("perf list", capture_output=True, shell=True)
   stdout = result.stdout.decode()
   for event in list(perf_events):
     if event not in stdout:
