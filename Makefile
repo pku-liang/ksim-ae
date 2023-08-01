@@ -1,27 +1,25 @@
-.phony: build-cases clean-cases
+.phony: build clean-build run clean-run
 
-build-cases:
+build:
 	$(MAKE) -C runs build
-clean-cases:
+clean-build:
 	$(MAKE) -C runs clean
 
-run-all:
+run:
 	python benchmark.py
 clean-run:
 	rm -rf results
 
-.phony: setup setup-sims setup-tools clean-setup-build
+.phony: prepare-setup setup distclean
 
 prepare-setup: prepare-setup-sims prepare-setup-tools
-setup: setup-sims setup-tools
-
 prepare-setup-%:
 	$(MAKE) -C $* prepare
+
+setup: setup-sims setup-tools
 setup-%:
 	$(MAKE) -C $* setup
 
-clean-tool-build:
-	$(MAKE) -C sims cleanbuild
 distclean:
 	$(MAKE) -C sims clean
 	$(MAKE) -C tools clean
