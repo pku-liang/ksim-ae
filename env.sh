@@ -10,10 +10,10 @@ fi
 export _KSIM_AE_PATH_UPDATED=1
 
 _color_print() {
-  tput setaf $1
-  printf "%s     \t" $2
+  tput setaf "$1"
+  printf "%s     \t" "$2"
   tput setaf 7
-  printf "%s\n" $3
+  printf "%s\n" "$3"
 }
 
 _show_status() {
