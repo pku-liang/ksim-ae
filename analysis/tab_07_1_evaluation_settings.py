@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 from common import *
+from format import *
 import re
 
 cpuinfo = []
@@ -28,6 +29,6 @@ for plat in plats:
 pd.DataFrame(cpuinfo, index=plats).T.style.hide(axis='index').to_latex(
   'out/tab_07_1.tex',
   caption='Evaluation Settings 1',
-  position_float="centering",
-  hrules=True
+  label='tab:setup-1',
+  **to_latex_format
 )

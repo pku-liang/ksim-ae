@@ -37,3 +37,9 @@ def mark_npos(bar, ypos, *args, **kws):
   _, y = inv_trans.transform((x0, (1 - ypos) * y0 + ypos * y1))
   plt.plot(npos, np.full(len(npos), y), *args, **kws)
   plt.xlim(xlim)
+
+to_latex_format = dict(
+  position_float="centering",
+  hrules=True,
+  position='h!'
+)

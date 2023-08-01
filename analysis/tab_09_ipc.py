@@ -45,6 +45,6 @@ if __name__ == '__main__':
   make_table(load_perf(), 'IPC', 'max').to_latex(
     'out/tab_09.tex', 
     caption='Instructions Per Cycle',
-    position_float="centering",
-    hrules=True
+    label='tab:ipc',
+    **to_latex_format
   )

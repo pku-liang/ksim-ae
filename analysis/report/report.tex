@@ -1,15 +1,33 @@
 \documentclass{sig-alternate}
 \usepackage{subcaption}
 \usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[bookmarks=true,breaklinks=true,letterpaper=true,colorlinks,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
 
 \title{Artifact Report of Khronos}
 
 \begin{document}
 \maketitle
 
-\pagestyle{plain}
+\begin{itemize}[noitemsep,topsep=0pt]
+  \item {\bf Benchmark size in Table 5} is shown in \autoref{tab:bench-size}.
+  \item {\bf Environment setup in Table 7} is shown in \autoref{tab:setup-1} and \autoref{tab:setup-2}.
+  \item {\bf Average speedups in Section 7.3 and 7.5} are shown in \autoref{tab:avg-speedup}.
+  \item {\bf Instruction per cycle in Table 9} is shown in \autoref{tab:ipc}.
+  \item {\bf Instruction counts in Table 10} are shown in \autoref{tab:ops}.
+  \item {\bf Single thread performance in Figure 10} is shown in \autoref{fig:single}.
+  \item {\bf Multi thread performance in Figure 12} is shown in \autoref{fig:multi}.
+  \item {\bf Performance on platforms in Figure 13} is shown in \autoref{fig:plat}
+\end{itemize}
 
-\begin{figure*}[t]
+\input{../out/tab_05.tex}
+\input{../out/tab_07_1.tex}
+\input{../out/tab_07_2.tex}
+\input{../out/tab_ex1.tex}
+\input{../out/tab_09.tex}
+\input{../out/tab_10.tex}
+
+\begin{figure*}[h!]
   \centering
   \begin{subfigure}{\linewidth}
     \centering
@@ -23,16 +41,18 @@
   \end{subfigure}
   \vspace*{-5mm}
   \caption{Single Thread Performance Comparison}
+  \label{fig:single}
 \end{figure*}
 
-\begin{figure*}
+\begin{figure*}[h!]
   \centering
   \includegraphics[width=\linewidth]{../out/fig_12}
   \vspace*{-5mm}
   \caption{Multi-thread Performance Comparison}
+  \label{fig:multi}
 \end{figure*}
 
-\begin{figure*}[t]
+\begin{figure*}[h!]
   \begin{subfigure}{\linewidth}
     \caption{Simulation Speedup on \texttt{plat-1}}
     \includegraphics[width=\linewidth]{../out/fig_13_1}
@@ -43,12 +63,7 @@
   \end{subfigure}
   \vspace*{-4mm}
   \caption{Performance on different platforms. }
+  \label{fig:plat}
 \end{figure*}
-
-\input{../out/tab_05.tex}
-\input{../out/tab_07_1.tex}
-\input{../out/tab_07_2.tex}
-\input{../out/tab_09.tex}
-\input{../out/tab_10.tex}
 
 \end{document}
