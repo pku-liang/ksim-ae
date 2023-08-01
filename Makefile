@@ -5,13 +5,15 @@ build:
 clean-build:
 	$(MAKE) -C runs clean
 
-run-all: run results/cpu-info.json results/size.csv
+run-all: run results/cpu-info.json results/size.csv results/extra-info.csv
 
 run:
 	python benchmark.py
 clean-run:
 	rm -rf results
 
+results/extra-info.csv:
+	./collect-extra-info.sh > $@
 results/cpu-info.json:
 	lscpu -J > $@
 results/size.csv:
