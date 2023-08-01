@@ -9,7 +9,8 @@ prepare:
 $(INSTALL_PREFIX)/bin/verilator: prepare $(wildcard verilator/src/**/*)
 	cd verilator && autoupdate && autoconf
 	cd verilator && ./configure --prefix=$(shell realpath $(INSTALL_PREFIX))
-	$(MAKE) -C verilator install
+	$(MAKE) -C verilator
+	$(MAKE) -C verilator -j 1 install
 
 clean-build:
 	git submodule deinit -f verilator

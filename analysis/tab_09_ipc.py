@@ -27,7 +27,7 @@ def make_latex_table(tab: pd.DataFrame) -> Styler:
 def export_latex(tab_s):
   return tab_s.to_latex().split('\hline')[2].strip()[:-2].strip()
 
-def make_table(df: pd.DataFrame, field='OPS') -> Styler:
+def make_table(df: pd.DataFrame, field='OPS', highlight='min') -> Styler:
   df = df.set_index('simulator').loc[sim_order].reset_index()
   df['IPC'] = df['instructions'] / df['cycles']
   df['OPS'] = df['instructions'] / 1000000000
@@ -35,11 +35,14 @@ def make_table(df: pd.DataFrame, field='OPS') -> Styler:
   piv.columns = ['C-Ver', 'Ver-1', 'Khr', 'ESS', 'Rep-1', 'VCS']
   piv_s = make_latex_table(piv)
   piv_s = piv_s.format('{:.2f}', na_rep='-')
-  piv_s = piv_s.highlight_min(axis=1, color='green', props='textbf:--rwrap')
+  if highlight == 'min':
+    piv_s = piv_s.highlight_min(axis=1, color='green', props='textbf:--rwrap')
+  else:
+    piv_s = piv_s.highlight_max(axis=1, color='green', props='textbf:--rwrap')
   return piv_s
 
 if __name__ == '__main__':
-  make_table(load_perf(), 'IPC').to_latex(
+  make_table(load_perf(), 'IPC', 'max').to_latex(
     'out/tab_09.tex', 
     caption='Instructions Per Cycle',
     position_float="centering",
