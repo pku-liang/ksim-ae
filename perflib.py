@@ -12,20 +12,30 @@ perf_events = [
   # "L1-dcache-prefetches",
   # "L1-icache-load-misses",
   # "L1-icache-loads",
-	# "l1_data_cache_fills_all",
-	"all_data_cache_accesses",
-	# "l2_cache_hits_from_dc_misses",
-	# "l2_cache_misses_from_dc_misses",
-	# "l2_cache_hits_from_ic_misses",
-	# "l2_cache_misses_from_ic_miss",
-	# "sse_avx_stalls",
-	# "task-clock",
-  "cache-misses",
-	"cycles",
-	"instructions",
-	# "branches",
-	# "branch-misses",
+  # "l1_data_cache_fills_all",
+  "all_data_cache_accesses",
+  # "l2_cache_hits_from_dc_misses",
+  # "l2_cache_misses_from_dc_misses",
+  # "l2_cache_hits_from_ic_misses",
+  # "l2_cache_misses_from_ic_miss",
+  # "sse_avx_stalls",
+  # "task-clock",
+  # "cache-misses",
+  "cycles",
+  "instructions",
+  # "branches",
+  # "branch-misses",
 ]
+
+def check_events():
+  result = subprocess.run(["perf", "list"], capture_output=True, shell=True)
+  for event in list(perf_events):
+    if event not in result:
+      print(f'remove unsupported perf event: {event}')
+      perf_events.remove(event)
+  print('perf event: ', ' '.join(perf_events))
+
+check_events()
 
 perf_groups = [
   # 'l2_cache'
