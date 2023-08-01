@@ -15,4 +15,5 @@ endef
 $(eval $(foreach T,$(targets),$(call add_dep,$(T))))
 
 clean:
+	$(MAKE) -C report clean
 	rm -rf out
