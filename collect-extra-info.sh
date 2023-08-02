@@ -20,14 +20,18 @@ verilator_version() {
 }
 
 firrtl_version() {
-  echo -n "Version: "
   if ! [ -f tools/firrtl/firrtl/build.sbt ]; then
-    return 1
+    echo "nan"
+    return 0
   fi
+  echo -n "Version: "
   cat tools/firrtl/firrtl/build.sbt | grep "  version :=" | cut -d'"' -f2
 }
 
 vcs_version() {
+  if [ -z ${VCS_HOME+x} ]; then
+    echo "nan"; return 0
+  fi
   vcs_version=$(basename $VCS_HOME)
   echo ${vcs_version##O-}
 }
