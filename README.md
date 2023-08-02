@@ -1,7 +1,7 @@
 # KSim Artifact Evaluation
 
 The evaluation will be run on 3 different machines, `base`, `plat-1`, and `plat-2`.
-`base` is the "master" machine, and the other two are "slave" machine.
+`base` is the "master" machine, and the other two are "slave" machines.
 
 # Quick Evaluation
 
@@ -25,10 +25,12 @@ Install texlive on master:
 pacman -S texlive # select all groups in texlive
 ```
 
+Sometimes language 
+
 ## SSH Setup
 
 The platform names are shown in `env.sh`.
-Configure `~/.ssh/config`, `~/.ssh/authorized_keys` correctly to make sure no password is needed for ssh, i.e. the following command should not throw error on `base`.
+Configure `~/.ssh/config`, `~/.ssh/authorized_keys` correctly to make sure no password is needed for ssh, i.e. the following command should not require password or throw errors.
 
 ```bash
 ssh base   # no password is needed
@@ -38,20 +40,20 @@ ssh plat-2 # no password is needed
 
 ## Tools and Simulators Setup
 
-Clone this repo on the `$HOME` directory of user.
+Clone this repo on the `$HOME` directory of the user.
 
 ```bash
 git clone [this-repo] ~/ksim-ae
 ```
 
-Tools are in `sims` and `tools` folder, run the following command to setup all simulators.
+Tools are in `sims` and `tools` folder, run the following command to set up all simulators.
 
 ```bash
 make prepare # download git submodule, make sure to run in single thread
 make -j$(nproc) setup # setup environment, multi-threading is supported
 ```
 
-Sometimes `verilator` may fail compilation on multi-thread, you may need to run setup in single thread after failure.
+Sometimes `verilator` may fail compilation on multi-thread, you may need to run setup in a single thread after failure.
 
 ```bash
 make -j1 setup
@@ -80,7 +82,7 @@ hosts:          plat-1 plat-2
 
 ## Run Experiment
 
-The experiment is divided into two phases, first build executable files and then run the executable file to collect performance data.
+The experiment is divided into two phases, first, build executable files and then run the executable file to collect performance data.
 
 Build the executable:
 
@@ -108,10 +110,10 @@ results/
 
 ## Generate Report
 
-In the `base` machine, run the following command to generate performance report.
+In the `base` machine, run the following command to generate a performance report.
 
 ```bash
 make report
 ```
 
-This command will copy results in `base`, `plat-1`, `plat-2` into `analysis/data` and generate report file according the template in `analysis/report`.
+This command will copy results in `base`, `plat-1`, `plat-2` into `analysis/data` and generate a report file according to the template in `analysis/report`.
