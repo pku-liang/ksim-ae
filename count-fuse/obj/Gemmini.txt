@@ -1,0 +1,3 @@
+<stdin>:7:7: error: unexpected error: custom op 'sv.macro.def' is unknown
+      sv.macro.def @ASSERT_VERBOSE_COND_ "(`ASSERT_VERBOSE_COND)"
+      ^

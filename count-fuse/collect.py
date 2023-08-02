@@ -2,6 +2,11 @@ from pathlib import Path
 import os
 import re
 
+df = []
+
+for file in Path('./obj').glob('*.txt'):
+  data = re.findall()
+
 cases = Path(os.environ['TEST_ROOT']).joinpath('cases')
 cases = [f.stem for f in cases.glob('*.fir')]
 obj_dir = Path('obj')
