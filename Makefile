@@ -32,8 +32,8 @@ results/size.csv:
 
 report:
 	$(assert_env)
-	$(MAKE) -C analysis/data
-	$(MAKE) -C analysis
+	$(MAKE) -j -C analysis/data
+	$(MAKE) -j -C analysis
 	cp analysis/report/report.pdf ./
 	@tput setaf 2; echo "Finish, see report.pdf to verify the artifact"; tput setaf 7
 
