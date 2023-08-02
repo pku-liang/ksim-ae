@@ -11,7 +11,7 @@ clean-build:
 	$(assert_env)
 	$(MAKE) -C runs clean
 
-run-all: run results/cpu-info.json results/size.csv results/extra-info.csv results/fused.csv
+run-all: run results/cpu-info.json results/size.csv results/extra-info.csv results/fuse.csv
 
 run:
 	$(assert_env)
