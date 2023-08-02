@@ -4,10 +4,10 @@ TARGETS = $(patsubst $(CASE_ROOT)/%.fir,obj/%.txt,$(CASES))
 EXTRA_DEP = $(shell which ksim) count-fuse.sh
 $(shell [ -d obj ] || mkdir obj)
 
-all: $(TARGETS) $(CASE_ROOT)/results/fused.csv
+all: $(TARGETS) $(CASE_ROOT)/results/fuse.csv
 run: $(TARGETS)
 
-$(CASE_ROOT)/results/fused.csv: collect.py $(TARGETS)
+$(CASE_ROOT)/results/fuse.csv: collect.py $(TARGETS)
 	python collect.py
 
 obj/%.txt: $(CASE_ROOT)/%.fir $(EXTRA_DEP)

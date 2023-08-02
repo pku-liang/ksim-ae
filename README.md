@@ -7,7 +7,8 @@ The evaluation will be run on 3 different machines, `base`, `plat-1`, and `plat-
 
 ## System Requirements
 
-Install experiments requirements on all machines:
+Install experiments requirements on all machines,
+if you are using our offered computer, all the requirements have been installed.
 
 ```bash
 pacman -S wget rsync \
@@ -25,7 +26,11 @@ Install texlive on master:
 pacman -S texlive # select all groups in texlive
 ```
 
-Sometimes language 
+Sometimes language may break the auto scripts, use the following command to reset language before evaluation:
+
+```bash
+unset LC_ALL LANG LANGUAGE
+```
 
 ## SSH Setup
 
@@ -99,13 +104,14 @@ make -j1 run-all
 The experiment data is listed in `results` folder, like this:
 
 ```bash
-results/
+$ tree -L 1 results
+results
 ├── cpu-info.json
 ├── extra-info.csv
+├── fuse.csv
 ├── result.csv
 ├── runs
-│   ├── Conv2D-circt-verilator.json
-......
+└── size.csv
 ```
 
 ## Generate Report

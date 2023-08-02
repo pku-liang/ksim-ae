@@ -29,7 +29,7 @@ results/cpu-info.json:
 results/size.csv:
 	$(assert_env)
 	$(MAKE) -C count-size
-results/fused.csv:
+results/fuse.csv:
 	$(assert_env)
 	$(MAKE) -C count-fuse
 
