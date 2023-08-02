@@ -48,8 +48,10 @@ setup-%:
 	$(MAKE) -C $* setup
 
 distclean:
+	$(MAKE) -C count-fuse clean
+	$(MAKE) -C count-size clean
+	$(MAKE) -C runs clean
 	$(MAKE) -C sims clean
 	$(MAKE) -C tools clean
-	$(MAKE) -C runs clean
 	$(MAKE) -C analysis clean
 	$(MAKE) -C analysis/data clean
