@@ -28,7 +28,8 @@ firrtl_version() {
 }
 
 vcs_version() {
-  echo "2018.09-SP2"
+  vcs_version=$(basename $VCS_HOME)
+  echo ${vcs_version##O-}
 }
 
 echo "field,value"
