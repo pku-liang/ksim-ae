@@ -20,10 +20,11 @@ pacman -S wget rsync \
   flex bison help2man perf
 ```
 
-Install texlive on master:
+Install texlive on mastcer:
 
 ```bash
 pacman -S texlive # select all groups in texlive
+pacman -S python-jinja # to generate latex table
 ```
 
 Sometimes language may break the auto scripts, use the following command to reset language before evaluation:
