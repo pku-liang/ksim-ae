@@ -66,6 +66,7 @@ Sometimes setup fail due to multi-threading or sbt failure. You need to rerun `m
 After tool setup, run `source env.sh` to check the environment. Please note that `vcs` is only available on `base`. Make sure `vcs` is in `runs` list on `base` and not on `plat-1` and `plat-2`.
 
 ```bash
+Check Tools
 ksim            is at ./sims/install/bin/ksim
 llc             is at ./sims/install/bin/llc
 verilator       is at ./sims/install/bin/verilator
@@ -78,10 +79,14 @@ repcut          is at ./sims/bin/repcut
 KaHyPar         is at ./sims/bin/KaHyPar
 firclean        is at ./tools/bin/firclean
 timeit          is at ./tools/bin/timeit
-vcs             is not found
+vcs             is at /opt/synopsys/vcs/O-2018.09-SP2/bin/vcs
 
-runs:           circt-verilator verilator-1 verilator-2 verilator-4 ksim essent repcut-1 repcut-2 repcut-4 repcut-6 repcut-8
-hosts:          plat-1 plat-2
+Runs:           circt-verilator verilator-1 verilator-2 verilator-4 ksim essent repcut-1 repcut-2 repcut-4 repcut-6 repcut-8 vcs
+
+Check SSH Connectivity
+base            success to connect
+plat-1          success to connect
+plat-2          success to connect
 ```
 
 ## Run Experiment
