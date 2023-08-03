@@ -11,7 +11,7 @@ df = load_perf(order=mt_order)
 df = df[df.run >= 3].copy()
 df['speed'] = df['sim-cycles'] / df['time']
 df['ipc'] = df['instructions'] / df['cycles']
-df['MPKI'] = df['cache-misses'] / df['instructions'] * 1000
+# df['MPKI'] = df['cache-misses'] / df['instructions'] * 1000
 
 piv = df.pivot_table(values='speed', index='benchmark', columns='simulator')
 baseline = piv[baseline_name].copy()
