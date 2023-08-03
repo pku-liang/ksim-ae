@@ -58,3 +58,6 @@ distclean:
 	$(MAKE) -C tools clean
 	$(MAKE) -C analysis clean
 	$(MAKE) -C analysis/data clean
+
+auto:
+	./auto.sh
