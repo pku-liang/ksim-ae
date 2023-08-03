@@ -8,7 +8,7 @@ The evaluation will be run on 3 different machines, `base`, `plat-1`, and `plat-
 ## System Requirements
 
 Install experiments requirements on all machines,
-if you are using our offered computer, all the requirements have been installed.
+*if you are using our offered computer for artifact, all the requirements have been installed.*
 
 ```bash
 pacman -S wget rsync \
@@ -39,14 +39,16 @@ The platform names are shown in `env.sh`.
 Configure `~/.ssh/config`, `~/.ssh/authorized_keys` correctly to make sure no password is needed for ssh, i.e. the following command should not require password or throw errors.
 
 ```bash
-ssh base   # no password is needed
-ssh plat-1 # no password is needed
-ssh plat-2 # no password is needed
+ssh base true   # no password is needed
+ssh plat-1 true # no password is needed
+ssh plat-2 true # no password is needed
 ```
+
+*Note: Make sure `base` can ssh itself.*
 
 ## Tools and Simulators Setup
 
-Clone this repo on the `$HOME` directory of the user.
+Clone this repo **to the `$HOME` directory** of the user.
 
 ```bash
 git clone [this-repo] ~/ksim-ae
@@ -59,13 +61,9 @@ make prepare # download git submodule, make sure to run in single thread
 make -j$(nproc) setup # setup environment, multi-threading is supported
 ```
 
-Sometimes `verilator` may fail compilation on multi-thread, you may need to run setup in a single thread after failure.
+Sometimes setup fail due to multi-threading or sbt failure. You need to rerun `make setup`. We have 
 
-```bash
-make -j1 setup
-```
-
-After the setup, run `source env.sh` to check the environment. Please note that `vcs` is only available on `base`. Make sure `vcs` is in `runs` list on `base` and not on `plat-1` and `plat-2`.
+After tool setup, run `source env.sh` to check the environment. Please note that `vcs` is only available on `base`. Make sure `vcs` is in `runs` list on `base` and not on `plat-1` and `plat-2`.
 
 ```bash
 ksim            is at ./sims/install/bin/ksim
@@ -117,10 +115,13 @@ results
 
 ## Generate Report
 
-In the `base` machine, run the following command to generate a performance report.
+On the `base` machine, run the following command to generate a performance report (`report.pdf`).
+This command will copy results in `base`, `plat-1`, `plat-2` into `analysis/data` and generate a report file according to the template in `analysis/report`.
 
 ```bash
 make report
 ```
 
-This command will copy results in `base`, `plat-1`, `plat-2` into `analysis/data` and generate a report file according to the template in `analysis/report`.
+Please download the `report.pdf` and see the performance. The report file should be like this:
+
+![](./.fig/report-example.png)

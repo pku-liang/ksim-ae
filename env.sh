@@ -19,6 +19,7 @@ _color_print() {
 _show_status() {
   if ! which $1 2>/dev/null > /dev/null; then
     _color_print 1 "$1" "is not found"
+    return 1
   else
     show_path=$(which $1)
     if realpath --relative-to=$PWD $show_path 2>/dev/null >/dev/null; then
@@ -28,26 +29,33 @@ _show_status() {
       fi
     fi
     _color_print 2 "$1" "is at $show_path"
+    return 0
+  fi
+}
+
+_show_ssh() {
+  if ! ssh $1 true; then
+    _color_print 1 "$1" "unable to connect"
+    return 1
+  else
+    _color_print 2 "$1" "success to connect"
+    return 0
   fi
 }
 
 show-status() {
-  _show_status ksim
-  _show_status llc
-  _show_status verilator
-  _show_status firtool
-  _show_status firrtl
-  _show_status g++
-  _show_status clang++
-  _show_status essent
-  _show_status repcut
-  _show_status KaHyPar
-  _show_status firclean
-  _show_status timeit
-  _show_status vcs
+  echo "Check Tools"
+  tools="ksim llc verilator firtool firrtl g++ clang++ essent repcut KaHyPar firclean timeit vcs"
+  for tool in $(echo $tools); do
+    _show_status $tool
+  done
   echo
-  _color_print 4 "runs:" "$SIMS"
-  _color_print 4 "hosts:" "$HOSTS"
+  _color_print 4 "Runs:" "$SIMS"
+  echo
+  echo "Check SSH Connectivity"
+  for plat in $(echo $HOSTS); do
+    _show_ssh $plat
+  done
 }
 
 show-status
