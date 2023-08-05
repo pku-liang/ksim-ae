@@ -25,6 +25,7 @@ bar = sns.barplot(
   x='benchmark', y='speedup',
   hue='simulator', hue_order=mt_order,
   palette=mt_color,
+  order=bench_order,
   width=1 - 1 / (len(sim_order) + 1),
 )
 
