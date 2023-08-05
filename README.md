@@ -1,4 +1,4 @@
-# KSim Artifact Evaluation
+# ksim Artifact Evaluation
 
 The evaluation will be run on 3 different machines, `base`, `plat-1`, and `plat-2`.
 `base` is the "master" machine, and the other two are "slave" machines.
@@ -8,7 +8,7 @@ The evaluation will be run on 3 different machines, `base`, `plat-1`, and `plat-
 ## System Requirements
 
 Install experiments requirements on all machines,
-*if you are using our offered computer for artifact, all the requirements have been installed.*
+*if you are using our offered computer for artifacts, all the requirements have been installed.*
 
 ```bash
 pacman -S wget rsync \
@@ -20,7 +20,7 @@ pacman -S wget rsync \
   flex bison help2man perf
 ```
 
-Install texlive on mastcer:
+Install pdf build dependencies on `base`:
 
 ```bash
 pacman -S texlive # select all groups in texlive
@@ -56,14 +56,9 @@ git clone [this-repo] ~/ksim-ae
 
 Tools are in `sims` and `tools` folder, run the following command to set up all simulators.
 
-```bash
-make prepare # download git submodule, make sure to run in single thread
-make -j$(nproc) setup # setup environment, multi-threading is supported
-```
+Sometimes setup fails due to multi-threading or sbt failure. You need to rerun `make setup`.
 
-Sometimes setup fail due to multi-threading or sbt failure. You need to rerun `make setup`. We have 
-
-After tool setup, run `source env.sh` to check the environment. Please note that `vcs` is only available on `base`. Make sure `vcs` is in `runs` list on `base` and not on `plat-1` and `plat-2`.
+After setup, run `source env.sh` to check the environment. Please note that `vcs` is only available on `base`. Make sure `vcs` is in `runs` list on `base` and not on `plat-1` and `plat-2`.
 
 ```bash
 Check Tools
