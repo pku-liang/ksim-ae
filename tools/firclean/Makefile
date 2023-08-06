@@ -11,5 +11,5 @@ firclean.jar: $(wildcard src/**/*)
 	sbt assembly
 
 clean:
-	rm -rf $(INSTALL_DIR)/{firclean, firclean.jar}
+	rm -rf $(INSTALL_DIR)/{firclean,firclean.jar}
 	rm -rf target firclean.jar project/target project/project/target

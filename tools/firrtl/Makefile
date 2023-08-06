@@ -16,4 +16,4 @@ clean-build:
 	rm -rf prepare
 
 clean: clean-build
-	rm -rf $(INSTALL_DIR)/{firrtl, firrtl.jar}
+	rm -rf $(INSTALL_DIR)/{firrtl,firrtl.jar}
