@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+# set -xe
 
 # prepare git submodules
 make prepare-setup
@@ -18,4 +18,4 @@ make -j$(nproc) build
 make run-all
 
 # generate report.pdf
-make report
+# make report

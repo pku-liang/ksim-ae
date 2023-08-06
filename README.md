@@ -3,7 +3,7 @@
 The evaluation will be run on 3 different machines, `base`, `plat-1`, and `plat-2`.
 `base` is the "master" machine, and the other two are "slave" machines.
 
-# Quick Evaluation
+# Setup
 
 ## System Requirements
 
@@ -36,7 +36,7 @@ unset LC_ALL LANG LANGUAGE
 ## SSH Setup
 
 The platform names are shown in `env.sh`.
-Configure `~/.ssh/config`, `~/.ssh/authorized_keys` correctly to make sure no password is needed for ssh, i.e. the following command should not require password or throw errors.
+Configure `~/.ssh/config`, `~/.ssh/authorized_keys` correctly to make sure no password is needed for ssh **on each machine**, i.e. the following command should not require password or throw errors.
 
 ```bash
 ssh base true   # no password is needed
@@ -46,13 +46,21 @@ ssh plat-2 true # no password is needed
 
 *Note: Make sure `base` can ssh itself.*
 
-## Tools and Simulators Setup
+## Evaluation
 
-Clone this repo **to the `$HOME` directory** of the user.
+Clone this repo **to the `$HOME` directory** on each machine.
 
 ```bash
 git clone [this-repo] ~/ksim-ae
 ```
+
+Use the auto test script to evaluate. 
+
+```bash
+make auto
+```
+
+## Tools and Simulators Setup
 
 Tools are in `sims` and `tools` folder, run the following command to set up all simulators.
 
