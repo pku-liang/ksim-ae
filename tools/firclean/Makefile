@@ -12,3 +12,4 @@ firclean.jar: $(wildcard src/**/*)
 
 clean:
 	rm -rf $(INSTALL_DIR)/{firclean, firclean.jar}
+	rm -rf target firclean.jar project/target project/project/target
