@@ -1,4 +1,4 @@
-# ksim Artifact Evaluation
+# Artifact Evaluation of Khronos
 
 The evaluation will be run on 3 different machines, `base`, `plat-1`, and `plat-2`.
 `base` is the "master" machine, and the other two are "slave" machines.
@@ -46,19 +46,33 @@ ssh plat-2 true # no password is needed
 
 *Note: Make sure `base` can ssh itself.*
 
-## Evaluation
+# Evaluation
 
-Clone this repo **to the `$HOME` directory** on each machine.
+Clone this repo to the **`$HOME`** directory **on each machine**.
 
 ```bash
 git clone [this-repo] ~/ksim-ae
 ```
 
-Use the auto test script to evaluate. 
+Use the auto script to evaluate run build and evaluation **on each machine**.
 
 ```bash
 make auto
 ```
+
+Finally, run the report script **on `base` machine**
+
+```bash
+make report
+```
+
+Then, download the `report.pdf` file and check the paper, the pdf file looks like this:
+
+![](./.fig/report-example.png)
+
+If fail, please see the evaluation details.
+
+# Evaluation Details
 
 ## Tools and Simulators Setup
 
@@ -130,6 +144,4 @@ This command will copy results in `base`, `plat-1`, `plat-2` into `analysis/data
 make report
 ```
 
-Please download the `report.pdf` and see the performance. The report file should be like this:
-
-![](./.fig/report-example.png)
+Please download the `report.pdf` and see the performance.
