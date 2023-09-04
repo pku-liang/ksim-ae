@@ -5,5 +5,6 @@ output=$2
 
 pipeline="builtin.module(ksim-remove-sv, ksim-flatten)"
 
+# run ksim with statistics
 firtool --ir-hw --disable-all-randomization -dedup $input | \
 ksim --mlir-pass-statistics -o /dev/null 2> $output
