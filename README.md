@@ -78,9 +78,14 @@ If fail, please see the evaluation details.
 
 Tools are in `sims` and `tools` folder, run the following command to set up all simulators.
 
+```bash
+make -j1 prepare-setup
+make -j$(nproc) setup
+```
+
 Sometimes setup fails due to multi-threading or sbt failure. You need to rerun `make setup`.
 
-After setup, run `source env.sh` to check the environment. Please note that `vcs` is only available on `base`. Make sure `vcs` is in `runs` list on `base` and not on `plat-1` and `plat-2`.
+After setup, run `. ./env.sh` to check the environment. Please note that `vcs` is only available on `base`. Make sure `vcs` is in `runs` list on `base` and not on `plat-1` and `plat-2`.
 
 ```bash
 Check Tools
@@ -145,5 +150,3 @@ make report
 ```
 
 Please download the `report.pdf` and see the performance.
-
-# 

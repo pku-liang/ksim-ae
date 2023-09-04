@@ -3,7 +3,7 @@
 # set -xe
 
 # prepare git submodules
-make prepare-setup
+make -j1 prepare-setup
 
 # install depedencies
 make -j$(nproc) setup
@@ -15,7 +15,7 @@ make -j$(nproc) setup
 make -j$(nproc) build
 
 # run all experiments
-make run-all
+make -j1 run-all
 
 # generate report.pdf
 # make report
